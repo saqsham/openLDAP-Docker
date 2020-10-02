@@ -56,6 +56,8 @@ services:
     volumes:
       - "./.data/var/lib/ldap:/var/lib/ldap"
       - "./.data/etc/ldap/slapd.d:/etc/ldap/slapd.d"
+      - "./bootstrap:/container/service/slapd/assets/config/bootstrap"
+      - "./certs:/container/service/slapd/assets/certs"
     links:
       - db
     restart: always    
@@ -67,7 +69,13 @@ services:
       LDAP_ORGANISATION: xongl
       LDAP_DOMAIN: ldap.xongl.com
       LDAP_ADMIN_PASSWORD: ldap
-      LDAP_TLS: "false"
+      LDAP_CONFIG_PASSWORD: ldap-config
+      LDAP_TLS: "true"
+      LDAP_TLS_CRT_FILENAME: cert.crt
+      LDAP_TLS_KEY_FILENAME: cert.key
+      LDAP_TLS_DH_PARAM_FILENAME: dhparam.pem
+      LDAP_TLS_VERIFY_CLIENT: never
+      LDAP_TLS_ENFORCE: "false"
 
   ldapbackup:
     depends_on:

@@ -1,10 +1,17 @@
-##
-PAT: 4f93c1662c191cb731499aa16988dd0e3e755285
+## PAT: 4f93c1662c191cb731499aa16988dd0e3e755285
+
+## Site
+
+https://101.53.147.54:6444
 
 ## Some LDAP commands
 
 # for checking
-ldapsearch -x -b 'dc=mydomainname,dc=name,dc=example,dc=com' '(objectClass=*)'
+ldapsearch -x -b 'dc=ldap,dc=xongl,dc=com' '(objectClass=*)'
+ldapsearch -x -h localhost -b dc=ldap,dc=xongl,dc=com -D "cn=admin,dc=ldap,dc=xongl,dc=com" -w ldap
 
-# for checking
-ldapsearch -x -h localhost -b dc=ldap,dc=vives,dc=be -D "cn=admin,dc=ldap,dc=vives,dc=be" -w ldap
+# attach TLS to docker container
+docker run --hostname ldap.xongl.com --detach osixia/openldap:latest
+
+# Check for a user
+docker exec $LDAP2_CID ldapsearch -x -H ldap://ldap.xongl.com -b dc=ldap,dc=xongl,dc=com -D "cn=admin,dc=ldap,dc=xongl,dc=com" -w admin -ZZ
