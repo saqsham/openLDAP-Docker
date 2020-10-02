@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services: 
   ouroboros:
     hostname: ouroboros
@@ -16,7 +16,7 @@ services:
     image: mysql:latest
     volumes:
       - "./.data/db:/var/lib/mysql"
-      - "./conf/mysql:/etc/mysql/conf.d"
+      - "./.data/conf/mysql:/etc/mysql/conf.d"
     restart: always    
     environment:
       MYSQL_ROOT_PASSWORD: ldap
@@ -35,7 +35,7 @@ services:
       - db
       - ldap:ldap.xongl.com
     ports: 
-      - 6444:443  
+      - "6444:443 " 
     restart: always
     environment:
       LDAP_DB_HOST: db:3306
@@ -52,12 +52,10 @@ services:
     hostname: xongldata
     domainname: ldap.xongl.com
     ports:
-      - 390:389
+      - "390:389"
     volumes:
       - "./.data/var/lib/ldap:/var/lib/ldap"
       - "./.data/etc/ldap/slapd.d:/etc/ldap/slapd.d"
-      - "./bootstrap:/container/service/slapd/assets/config/bootstrap"
-      - "./certs:/container/service/slapd/assets/certs"
     links:
       - db
     restart: always    
@@ -70,12 +68,7 @@ services:
       LDAP_DOMAIN: ldap.xongl.com
       LDAP_ADMIN_PASSWORD: ldap
       LDAP_CONFIG_PASSWORD: ldap-config
-      LDAP_TLS: "true"
-      LDAP_TLS_CRT_FILENAME: cert.crt
-      LDAP_TLS_KEY_FILENAME: cert.key
-      LDAP_TLS_DH_PARAM_FILENAME: dhparam.pem
-      LDAP_TLS_VERIFY_CLIENT: never
-      LDAP_TLS_ENFORCE: "false"
+      LDAP_TLS: "false"
 
   ldapbackup:
     depends_on:

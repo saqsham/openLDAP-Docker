@@ -67,6 +67,7 @@ services:
       LDAP_ORGANISATION: xongl
       LDAP_DOMAIN: ldap.xongl.com
       LDAP_ADMIN_PASSWORD: ldap
+      LDAP_CONFIG_PASSWORD: ldap-config
       LDAP_TLS: "false"
 
   ldapbackup:
