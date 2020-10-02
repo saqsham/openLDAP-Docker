@@ -57,7 +57,6 @@ services:
       - "./.data/var/lib/ldap:/var/lib/ldap"
       - "./.data/etc/ldap/slapd.d:/etc/ldap/slapd.d"
       - "./bootstrap:/container/service/slapd/assets/config/bootstrap"
-      - "./certs:/container/service/slapd/assets/certs"
     links:
       - db
     restart: always    
