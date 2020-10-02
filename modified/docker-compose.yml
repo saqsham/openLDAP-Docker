@@ -52,7 +52,7 @@ services:
     hostname: xongldata
     domainname: ldap.xongl.com
     ports:
-      - "389:389"
+      - 390:389
     volumes:
       - "./.data/var/lib/ldap:/var/lib/ldap"
       - "./.data/etc/ldap/slapd.d:/etc/ldap/slapd.d"
