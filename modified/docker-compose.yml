@@ -35,7 +35,7 @@ services:
       - db
       - ldap:ldap.xongl.com
     ports: 
-      - "6444:443 " 
+      - "6444:443" 
     restart: always
     environment:
       LDAP_DB_HOST: db:3306
