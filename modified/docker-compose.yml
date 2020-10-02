@@ -17,7 +17,7 @@ services:
     volumes:
       - "./.data/db:/var/lib/mysql"
       - "./conf/mysql:/etc/mysql/conf.d"
-    restart: restart    
+    restart: always    
     environment:
       MYSQL_ROOT_PASSWORD: ldap
       MYSQL_DATABASE: ldap
@@ -36,7 +36,7 @@ services:
       - ldap:ldap.xongl.com
     ports: 
       - 6444:443  
-    restart: restart
+    restart: always
     environment:
       LDAP_DB_HOST: db:3306
       LDAP_DB_PASSWORD: ldap
@@ -58,7 +58,7 @@ services:
       - "./.data/etc/ldap/slapd.d:/etc/ldap/slapd.d"
     links:
       - db
-    restart: restart    
+    restart: always    
     environment: 
       LDAP_DB_HOST: db:3306
       LDAP_DB_PASSWORD: ldap
@@ -82,7 +82,7 @@ services:
     links:
       - db
       - ldap:ldap.xongl.com
-    restart: restart    
+    restart: always    
     environment: 
       LDAP_DB_HOST: db:3306
       LDAP_DB_PASSWORD: ldap
