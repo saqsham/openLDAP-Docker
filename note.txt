@@ -1,0 +1,10 @@
+##
+PAT: 4f93c1662c191cb731499aa16988dd0e3e755285
+
+## Some LDAP commands
+
+# for checking
+ldapsearch -x -b 'dc=mydomainname,dc=name,dc=example,dc=com' '(objectClass=*)'
+
+# for checking
+ldapsearch -x -h localhost -b dc=ldap,dc=vives,dc=be -D "cn=admin,dc=ldap,dc=vives,dc=be" -w ldap
