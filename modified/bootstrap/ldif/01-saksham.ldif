@@ -1,4 +1,4 @@
-dn: uid=saksham,dc=ldap,dc=example,dc=org
+dn: uid=saksham,dc=ldap,dc=xongl,dc=com
 changetype: add
 uid: saksham
 cn: saksham
