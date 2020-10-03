@@ -12,6 +12,9 @@ services:
     restart: always
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - xonglcloud
+
   db:
     image: mysql:latest
     volumes:
@@ -23,7 +26,9 @@ services:
       MYSQL_DATABASE: ldap
       MYSQL_USER: xongl
       MYSQL_PASSWORD: ldap
-
+    networks:
+      - xonglcloud
+      
   ldap-client:
     image: osixia/phpldapadmin:latest
     hostname: xongldata
@@ -44,6 +49,8 @@ services:
       LDAP_DB_NAME: ldap
       PHPLDAPADMIN_LDAP_HOSTS: "ldap"  
       PHPLDAPADMIN_LDAP_CLIENT_TLS: "false"
+    networks:
+      - xonglcloud
 
   ldap:
     depends_on:
@@ -62,6 +69,8 @@ services:
     links:
       - db
     restart: always
+    networks:
+      - xonglcloud
 
   ldapbackup:
     depends_on:
@@ -87,6 +96,12 @@ services:
       LDAP_ADMIN_PASSWORD: ldap
       LDAP_BACKUP_CONFIG_CRON_EXP: "0 5 * * *"
       LDAP_BACKUP_DATA_CRON_EXP: "0 5 * * *"
+    networks:
+      - xonglcloud
 
 volumes:
     .data:
+  
+networks: 
+  xonglcloud:
+    driver: bridge
