@@ -1,4 +1,4 @@
-dn: cn=Turanga Leela,ou=people,dc=planetexpress,dc=com
+dn: cn=Turanga Leela,ou=people,dc=ldap,dc=planetexpress,dc=com
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
 objectClass: person

@@ -1,4 +1,4 @@
-dn: cn=Amy Wong+sn=Kroker,ou=people,dc=planetexpress,dc=com
+dn: cn=Amy Wong+sn=Kroker,ou=people,dc=ldap,dc=planetexpress,dc=com
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson

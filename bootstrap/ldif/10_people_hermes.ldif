@@ -1,4 +1,4 @@
-dn: cn=Hermes Conrad,ou=people,dc=planetexpress,dc=com
+dn: cn=Hermes Conrad,ou=people,dc=ldap,dc=planetexpress,dc=com
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson

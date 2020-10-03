@@ -1,4 +1,4 @@
-dn: cn=Philip J. Fry,ou=people,dc=planetexpress,dc=com
+dn: cn=Philip J. Fry,ou=people,dc=ldap,dc=planetexpress,dc=com
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
 objectClass: person
