@@ -1,4 +1,4 @@
-dn: uid=johndoe,ou=people,dc=xongl,dc=com
+dn: uid=johndoe,ou=people,dc=ldap,dc=xongl,dc=com
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
@@ -16,7 +16,7 @@ shadowInactive: 7
 shadowLastChange: 0
 userPassword: ldap-john
 
-dn: cn=johndoe,ou=groups,dc=xongl,dc=com
+dn: cn=johndoe,ou=groups,dc=ldap,dc=xongl,dc=com
 objectClass: posixGroup
 cn: johndoe
 gidNumber: 10000

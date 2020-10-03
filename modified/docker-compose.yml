@@ -27,13 +27,13 @@ services:
   ldap-client:
     image: osixia/phpldapadmin:latest
     hostname: xongldata
-    domainname: xongl.com
+    domainname: ldap.xongl.com
     depends_on:
       - db
       - ldap
     links:
       - db
-      - ldap:xongl.com
+      - ldap:ldap.xongl.com
     ports: 
       - "6444:443" 
     restart: always
@@ -53,7 +53,7 @@ services:
       dockerfile: ./Dockerfile   
     container_name: ldap
     hostname: xongldata
-    domainname: xongl.com
+    domainname: ldap.xongl.com
     ports:
       - "390:389"
     volumes:
@@ -69,13 +69,13 @@ services:
       - ldap  
     image: osixia/openldap-backup:latest  
     hostname: xongldata
-    domainname: xongl.com
+    domainname: ldap.xongl.com
     volumes:
       - "./.data/openldap/backup:/data/backup"
       - "./.data/etc/ldap/slapd.d:/etc/ldap/slapd.d"
     links:
       - db
-      - ldap:xongl.com
+      - ldap:ldap.xongl.com
     restart: always    
     environment: 
       LDAP_DB_HOST: db:3306
@@ -83,7 +83,7 @@ services:
       LDAP_DB_USER: xongl
       LDAP_DB_NAME: ldap 
       LDAP_ORGANISATION: xongl
-      LDAP_DOMAIN: xongl.com
+      LDAP_DOMAIN: ldap.xongl.com
       LDAP_ADMIN_PASSWORD: ldap
       LDAP_BACKUP_CONFIG_CRON_EXP: "0 5 * * *"
       LDAP_BACKUP_DATA_CRON_EXP: "0 5 * * *"

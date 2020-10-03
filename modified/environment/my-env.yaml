@@ -3,7 +3,7 @@ LDAP_DB_PASSWORD: "ldap"
 LDAP_DB_USER: "xongl"
 LDAP_DB_NAME: "ldap" 
 LDAP_ORGANISATION: "xongl"
-LDAP_DOMAIN: "xongl.com"
+LDAP_DOMAIN: "ldap.xongl.com"
 LDAP_ADMIN_PASSWORD: "ldap"
 LDAP_CONFIG_PASSWORD: "ldap-config"
 

@@ -5,9 +5,9 @@ olcAccess: to attrs=userPassword,shadowLastChange,shadowExpire
   by self write
   by anonymous auth
   by dn.subtree="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage 
-  by dn.exact="cn=readonly,ou=people,dc=xongl,dc=com" read 
+  by dn.exact="cn=readonly,ou=people,dc=ldap,dc=xongl,dc=com" read 
   by * none
-olcAccess: to dn.exact="cn=readonly,ou=people,dc=xongl,dc=com" by dn.subtree="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by * none
-olcAccess: to dn.subtree="dc=xongl,dc=com" by dn.subtree="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage
+olcAccess: to dn.exact="cn=readonly,ou=people,dc=ldap,dc=xongl,dc=com" by dn.subtree="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by * none
+olcAccess: to dn.subtree="dc=ldap,dc=xongl,dc=com" by dn.subtree="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage
   by users read 
   by * none

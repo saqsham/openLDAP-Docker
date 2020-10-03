@@ -1,7 +1,7 @@
-dn: ou=people,dc=xongl,dc=com
+dn: ou=people,dc=ldap,dc=xongl,dc=com
 objectClass: organizationalUnit
 ou: people
 
-dn: ou=group,dc=xongl,dc=com
+dn: ou=group,dc=ldap,dc=xongl,dc=com
 objectClass: organizationalUnit
 ou: group
