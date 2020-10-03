@@ -15,3 +15,8 @@ docker run --hostname xongl.com --detach osixia/openldap:latest
 
 # Check for a user
 docker exec $LDAP2_CID ldapsearch -x -H ldap://xongl.com -b dc=xongl,dc=com -D "cn=admin,dc=xongl,dc=com" -w admin -ZZ
+
+# add ldifs
+ldapadd -Y EXTERNAL -H ldapi:/// -f 10-user-group-base.ldif 
+
+# ldap://localhost
