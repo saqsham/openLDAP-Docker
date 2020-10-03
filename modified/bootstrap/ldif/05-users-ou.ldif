@@ -1,0 +1,9 @@
+dn: ou=people,dc=xongl,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: people
+
+dn: ou=groups,dc=xongl,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups

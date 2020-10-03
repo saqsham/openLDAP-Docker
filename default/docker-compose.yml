@@ -27,13 +27,13 @@ services:
   ldap-client:
     image: osixia/phpldapadmin:latest
     hostname: xongldata
-    domainname: ldap.xongl.com
+    domainname: xongl.com
     depends_on:
       - db
       - ldap
     links:
       - db
-      - ldap:ldap.xongl.com
+      - ldap:xongl.com
     ports: 
       - 6443:443  
     restart: always
