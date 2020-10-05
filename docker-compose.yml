@@ -1,15 +1,31 @@
-version: '3'
-services: 
+version: "3.5"
+
+services:
+  app:
+    image: app
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - ldap
+    ports:
+      - "3000:3000"
+    networks:
+      - xonglcloud
+
   ouroboros:
     hostname: ouroboros
     image: pyouroboros/ouroboros
+    container_name: ouroboros
     environment:
       CLEANUP: "true"
       INTERVAL: 300
       LOG_LEVEL: info
       SELF_UPDATE: "true"
       TZ: IST
-    restart: always
+    restart: unless-stopped
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
@@ -17,10 +33,11 @@ services:
 
   db:
     image: mysql:latest
+    container_name: db
     volumes:
       - "./.data/db:/var/lib/mysql"
       - "./.data/conf/mysql:/etc/mysql/conf.d"
-    restart: always    
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ldap
       MYSQL_DATABASE: ldap
@@ -28,9 +45,10 @@ services:
       MYSQL_PASSWORD: ldap
     networks:
       - xonglcloud
-      
+
   ldap-client:
     image: osixia/phpldapadmin:latest
+    container_name: ldap-client
     hostname: xongldata
     domainname: ldap.xongl.com
     depends_on:
@@ -39,15 +57,16 @@ services:
     links:
       - db
       - ldap:ldap.xongl.com
-    ports: 
-      - "6444:443" 
-    restart: always
+    ports:
+      - "6444:443"
+    restart: unless-stopped
+    command: --copy-service
     environment:
       LDAP_DB_HOST: db:3306
       LDAP_DB_PASSWORD: ldap
       LDAP_DB_USER: xongl
       LDAP_DB_NAME: ldap
-      PHPLDAPADMIN_LDAP_HOSTS: "ldap"  
+      PHPLDAPADMIN_LDAP_HOSTS: "ldap"
       PHPLDAPADMIN_LDAP_CLIENT_TLS: "false"
     networks:
       - xonglcloud
@@ -57,7 +76,7 @@ services:
       - db
     build:
       context: ./
-      dockerfile: ./Dockerfile   
+      dockerfile: ./Dockerfile
     container_name: ldap
     hostname: xongldata
     domainname: ldap.xongl.com
@@ -68,15 +87,15 @@ services:
       - "./.data/etc/ldap/slapd.d:/etc/ldap/slapd.d"
     links:
       - db
-    restart: always
+    restart: unless-stopped
     networks:
       - xonglcloud
 
   ldapbackup:
     depends_on:
       - db
-      - ldap  
-    image: osixia/openldap-backup:latest  
+      - ldap
+    image: osixia/openldap-backup:latest
     hostname: xongldata
     domainname: ldap.xongl.com
     volumes:
@@ -85,12 +104,12 @@ services:
     links:
       - db
       - ldap:ldap.xongl.com
-    restart: always    
-    environment: 
+    restart: unless-stopped
+    environment:
       LDAP_DB_HOST: db:3306
       LDAP_DB_PASSWORD: ldap
       LDAP_DB_USER: xongl
-      LDAP_DB_NAME: ldap 
+      LDAP_DB_NAME: ldap
       LDAP_ORGANISATION: xongl
       LDAP_DOMAIN: ldap.xongl.com
       LDAP_ADMIN_PASSWORD: ldap
@@ -100,8 +119,8 @@ services:
       - xonglcloud
 
 volumes:
-    .data:
-  
-networks: 
+  .data:
+
+networks:
   xonglcloud:
     driver: bridge
