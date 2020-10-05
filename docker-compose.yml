@@ -8,6 +8,8 @@ services:
       context: .
       dockerfile: ./app/Dockerfile
     restart: unless-stopped
+    hostname: xongldata
+    domainname: ldap.xongl.com
     depends_on:
       - ldap
     ports:
