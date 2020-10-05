@@ -12,6 +12,8 @@ services:
       - ldap
     ports:
       - "3000:3000"
+    links:
+      - ldap:ldap.xongl.com
     networks:
       - xonglcloud
 
