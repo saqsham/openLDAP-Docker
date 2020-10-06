@@ -1,10 +1,10 @@
-version: "3.7"
+version: "3.5"
+
 services:
   app:
     image: app
     container_name: app
     build:
-      network: host
       context: .
       dockerfile: ./app/Dockerfile
     restart: unless-stopped
@@ -15,7 +15,7 @@ services:
     ports:
       - "3000:3000"
     networks:
-      xonglcloud: {}
+      - xonglcloud
 
   ouroboros:
     hostname: ouroboros
@@ -31,7 +31,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
-      xonglcloud: {}
+      - xonglcloud
 
   db:
     image: mysql:latest
@@ -46,7 +46,7 @@ services:
       MYSQL_USER: xongl
       MYSQL_PASSWORD: ldap
     networks:
-      xonglcloud: {}
+      - xonglcloud
 
   ldap-client:
     image: osixia/phpldapadmin:latest
@@ -71,7 +71,7 @@ services:
       PHPLDAPADMIN_LDAP_HOSTS: "ldap"
       PHPLDAPADMIN_LDAP_CLIENT_TLS: "false"
     networks:
-      xonglcloud: {}
+      - xonglcloud
 
   ldap:
     depends_on:
@@ -91,7 +91,7 @@ services:
       - db
     restart: unless-stopped
     networks:
-      xonglcloud: {}
+      - xonglcloud
 
   ldapbackup:
     depends_on:
@@ -118,12 +118,10 @@ services:
       LDAP_BACKUP_CONFIG_CRON_EXP: "0 5 * * *"
       LDAP_BACKUP_DATA_CRON_EXP: "0 5 * * *"
     networks:
-      xonglcloud: {}
+      - xonglcloud
 
 volumes:
   .data:
 
 networks:
   xonglcloud:
-    external: true
-    name: host
