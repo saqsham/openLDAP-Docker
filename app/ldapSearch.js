@@ -4,7 +4,7 @@ const {
 } = require("util");
 
 const client = ldap.createClient({
-  url: "ldap"
+  url: "ldap://ldap"
 });
 
 client.bind = promisify(client.bind);
