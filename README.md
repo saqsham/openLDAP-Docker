@@ -32,4 +32,4 @@ docker run --hostname ldap.example.com --detach osixia/openldap:latest
 ## Additiontal Info
 
 - There are few bugs which needs to be worked on, like redploying the containers (after making some changes) will result in backup container throwing some error etc.
-- If the ldifs are not being added automatically then exec into the container then add them manually
+- If the ldifs are not being added automatically then exec into the container and add them manually
