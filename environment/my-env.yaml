@@ -1,9 +1,9 @@
 LDAP_DB_HOST: "db:3306"
 LDAP_DB_PASSWORD: "ldap"
-LDAP_DB_USER: "xongl"
+LDAP_DB_USER: "example"
 LDAP_DB_NAME: "ldap" 
-LDAP_ORGANISATION: "xongl"
-LDAP_DOMAIN: "ldap.xongl.com"
+LDAP_ORGANISATION: "example"
+LDAP_DOMAIN: "ldap.example.com"
 LDAP_ADMIN_PASSWORD: "ldap"
 LDAP_CONFIG_PASSWORD: "ldap-config"
 

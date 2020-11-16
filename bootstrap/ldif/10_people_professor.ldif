@@ -1,4 +1,4 @@
-dn: cn=Hubert J. Farnsworth,ou=people,dc=ldap,dc=xongl,dc=com
+dn: cn=Hubert J. Farnsworth,ou=people,dc=ldap,dc=example,dc=com
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
 objectClass: person

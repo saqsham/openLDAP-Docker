@@ -1,0 +1,4 @@
+# 
+note.txt
+app/node_modules/*
+app/package-lock.json

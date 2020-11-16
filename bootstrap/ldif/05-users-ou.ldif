@@ -1,9 +1,9 @@
-dn: ou=people,dc=ldap,dc=xongl,dc=com
+dn: ou=people,dc=ldap,dc=example,dc=com
 objectClass: organizationalUnit
 objectClass: top
 ou: people
 
-dn: ou=groups,dc=ldap,dc=xongl,dc=com
+dn: ou=groups,dc=ldap,dc=example,dc=com
 objectClass: organizationalUnit
 objectClass: top
 ou: groups

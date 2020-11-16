@@ -1,4 +1,4 @@
-dn: ou=people,dc=ldap,dc=xongl,dc=com
+dn: ou=people,dc=ldap,dc=example,dc=com
 objectClass: top
 objectClass: organizationalUnit
 description: Planet Express crew

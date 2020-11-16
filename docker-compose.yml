@@ -8,14 +8,14 @@ services:
       context: .
       dockerfile: ./app/Dockerfile
     restart: unless-stopped
-    hostname: xongldata
-    domainname: ldap.xongl.com
+    hostname: exampledata
+    domainname: ldap.example.com
     depends_on:
       - ldap
     ports:
       - "3000:3000"
     networks:
-      - xonglcloud
+      - examplecloud
 
   ouroboros:
     hostname: ouroboros
@@ -31,7 +31,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
-      - xonglcloud
+      - examplecloud
 
   db:
     image: mysql:latest
@@ -43,22 +43,22 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ldap
       MYSQL_DATABASE: ldap
-      MYSQL_USER: xongl
+      MYSQL_USER: example
       MYSQL_PASSWORD: ldap
     networks:
-      - xonglcloud
+      - examplecloud
 
   ldap-client:
     image: osixia/phpldapadmin:latest
     container_name: ldap-client
-    hostname: xongldata
-    domainname: ldap.xongl.com
+    hostname: exampledata
+    domainname: ldap.example.com
     depends_on:
       - db
       - ldap
     links:
       - db
-      - ldap:ldap.xongl.com
+      - ldap:ldap.example.com
     ports:
       - "6444:443"
     restart: unless-stopped
@@ -66,12 +66,12 @@ services:
     environment:
       LDAP_DB_HOST: db:3306
       LDAP_DB_PASSWORD: ldap
-      LDAP_DB_USER: xongl
+      LDAP_DB_USER: example
       LDAP_DB_NAME: ldap
       PHPLDAPADMIN_LDAP_HOSTS: "ldap"
       PHPLDAPADMIN_LDAP_CLIENT_TLS: "false"
     networks:
-      - xonglcloud
+      - examplecloud
 
   ldap:
     depends_on:
@@ -80,8 +80,8 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     container_name: ldap
-    hostname: xongldata
-    domainname: ldap.xongl.com
+    hostname: exampledata
+    domainname: ldap.example.com
     ports:
       - "390:389"
     volumes:
@@ -91,37 +91,37 @@ services:
       - db
     restart: unless-stopped
     networks:
-      - xonglcloud
+      - examplecloud
 
   ldapbackup:
     depends_on:
       - db
       - ldap
     image: osixia/openldap-backup:latest
-    hostname: xongldata
-    domainname: ldap.xongl.com
+    hostname: exampledata
+    domainname: ldap.example.com
     volumes:
       - "./.data/openldap/backup:/data/backup"
       - "./.data/etc/ldap/slapd.d:/etc/ldap/slapd.d"
     links:
       - db
-      - ldap:ldap.xongl.com
+      - ldap:ldap.example.com
     restart: unless-stopped
     environment:
       LDAP_DB_HOST: db:3306
       LDAP_DB_PASSWORD: ldap
-      LDAP_DB_USER: xongl
+      LDAP_DB_USER: example
       LDAP_DB_NAME: ldap
-      LDAP_ORGANISATION: xongl
-      LDAP_DOMAIN: ldap.xongl.com
+      LDAP_ORGANISATION: example
+      LDAP_DOMAIN: ldap.example.com
       LDAP_ADMIN_PASSWORD: ldap
       LDAP_BACKUP_CONFIG_CRON_EXP: "0 5 * * *"
       LDAP_BACKUP_DATA_CRON_EXP: "0 5 * * *"
     networks:
-      - xonglcloud
+      - examplecloud
 
 volumes:
   .data:
 
 networks:
-  xonglcloud:
+  examplecloud:
